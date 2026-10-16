@@ -1,204 +1,248 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f7fb">
-  <meta name="description" content="Four practical Python programs in one place, with one-click copy buttons.">
-  <title>Programming Codes</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #202538;
-      --muted: #6d7487;
-      --page: #f6f7fb;
-      --border: rgba(34, 42, 66, .10);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--page);
-      color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
-    }
-    .wrap { width: min(1100px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 64px; }
-    header { margin-bottom: 30px; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 11px; border-radius: 999px;
-      background: #e9ecf8; color: #4d5680; font-size: 12px; font-weight: 750;
-      letter-spacing: .07em; text-transform: uppercase;
-    }
-    h1 { margin: 14px 0 7px; font-size: clamp(30px, 5vw, 44px); line-height: 1.12; letter-spacing: -.04em; }
-    .subtitle { margin: 0; color: var(--muted); font-size: 16px; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
-    .program-card {
-      min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 18px;
-      box-shadow: 0 8px 28px rgba(30, 39, 70, .06);
-    }
-    .mint { --tint: #eaf8f1; --accent: #217b59; --codebg: #f7fffb; }
-    .lavender { --tint: #f0edff; --accent: #6651b8; --codebg: #fbfaff; }
-    .peach { --tint: #fff0e7; --accent: #a94e2a; --codebg: #fffaf6; }
-    .blue { --tint: #eaf3ff; --accent: #2c61a8; --codebg: #f8fbff; }
-    .card-top { background: var(--tint); padding: 20px 20px 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
-    .eyebrow { margin: 0 0 5px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .12em; }
-    h2 { margin: 0; font-size: 19px; line-height: 1.3; letter-spacing: -.02em; }
-    .source { margin: 7px 0 0; color: #73798a; font-size: 12px; }
-    .copy-btn {
-      flex: 0 0 auto; border: 0; border-radius: 10px; padding: 10px 12px; min-height: 40px;
-      color: white; background: var(--accent); font: inherit; font-size: 13px; font-weight: 750;
-      cursor: pointer; transition: filter .15s ease, transform .15s ease;
-    }
-    .copy-btn:hover { filter: brightness(.94); }
-    .copy-btn:active { transform: translateY(1px); }
-    .copy-btn:focus-visible { outline: 3px solid #242b40; outline-offset: 3px; }
-    .code-window {
-      margin: 0; padding: 18px; background: var(--codebg); color: #273044;
-      overflow: auto; max-height: 470px; font: 12.5px/1.65 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      tab-size: 4; white-space: pre; scrollbar-width: thin; scrollbar-color: #c4cbd7 transparent;
-    }
-    .code-window code { font: inherit; }
-    .card-bottom {
-      display: flex; justify-content: space-between; align-items: center; gap: 12px;
-      padding: 10px 18px; border-top: 1px solid var(--border); background: white;
-      color: #7a8191; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-    }
-    .copy-status { color: var(--accent); letter-spacing: 0; text-transform: none; font-size: 12px; }
-    footer { text-align: center; color: #858b9b; font-size: 12px; padding-top: 26px; }
-    @media (max-width: 760px) {
-      .wrap { width: min(100% - 22px, 560px); padding-top: 30px; }
-      .grid { grid-template-columns: 1fr; gap: 16px; }
-      .card-top { padding: 17px 15px 14px; }
-      .code-window { padding: 15px; max-height: 420px; font-size: 12px; }
-      h2 { font-size: 18px; }
-      .copy-btn { padding: 9px 10px; font-size: 12px; }
-    }
-    @media (max-width: 380px) {
-      .card-top { flex-direction: column; }
-      .copy-btn { align-self: flex-start; }
-    }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f7fb">
+<title>Programming Codes</title>
+<style>
+:root{color-scheme:light;--ink:#172033;--muted:#667085;--paper:#f6f7fb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+header{max-width:1120px;margin:0 auto;padding:48px 22px 26px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:#5865a7}
+.eyebrow:before{content:"";width:22px;height:2px;background:#5865a7}
+h1{font-size:clamp(2rem,5vw,3.3rem);letter-spacing:-.045em;line-height:1.08;margin:14px 0 10px}
+header p{margin:0;color:var(--muted);font-size:1.05rem}
+main{max-width:1120px;margin:0 auto;padding:0 22px 54px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.card{--accent:#5265a8;--wash:#eef1ff;background:white;border:1px solid color-mix(in srgb,var(--accent) 24%,white);border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(22,31,55,.06);min-width:0}
+.card-top{padding:20px 20px 16px;background:var(--wash);border-bottom:1px solid color-mix(in srgb,var(--accent) 18%,white)}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.number{font-size:.75rem;font-weight:800;letter-spacing:.09em;color:var(--accent);text-transform:uppercase}
+h2{font-size:1.12rem;line-height:1.3;margin:5px 0 0;letter-spacing:-.02em}
+.copy{flex-shrink:0;border:0;border-radius:10px;padding:10px 13px;background:var(--accent);color:white;font-family:inherit;font-size:.83rem;font-weight:700;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.08);transition:filter .15s}
+.copy:hover{filter:brightness(.92)}.copy:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 35%,white);outline-offset:3px}
+.status{height:18px;margin-top:8px;color:#245b42;font-size:.8rem;font-weight:650}
+pre{margin:0;padding:19px 20px 22px;overflow:auto;max-height:440px;background:var(--codebg,#fff);color:#20283b;font: .84rem/1.65 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;tab-size:2;white-space:pre;overscroll-behavior:contain}
+pre code{font:inherit}
+.card:nth-child(1){--accent:#5b61b8;--wash:#f0efff;--codebg:#fcfbff}
+.card:nth-child(2){--accent:#177c70;--wash:#e8f8f3;--codebg:#fbfffd}
+.card:nth-child(3){--accent:#a35b25;--wash:#fff1e4;--codebg:#fffdfa}
+.card:nth-child(4){--accent:#3569a8;--wash:#eaf3ff;--codebg:#fbfdff}
+.card:nth-child(5){--accent:#9a4776;--wash:#fbeef6;--codebg:#fffcfe}
+.note{grid-column:1/-1;padding:14px 17px;border-radius:12px;background:#fff8e8;border:1px solid #f1dfb4;color:#674c18;font-size:.9rem}
+footer{max-width:1120px;margin:0 auto;padding:0 22px 34px;color:var(--muted);font-size:.82rem}
+@media(max-width:760px){header{padding-top:34px}main{grid-template-columns:1fr;gap:16px}.card-top{padding:17px}pre{max-height:380px;padding:16px;font-size:.8rem}.copy{padding:9px 11px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-  <main class="wrap">
-    <header>
-      <span class="pill"><span aria-hidden="true">⌘</span> Python practicals</span>
-      <h1>Programming Codes</h1>
-      <p class="subtitle">All four programs in one place. Open a card, read the code, and copy it in one click.</p>
-    </header>
-    <section class="grid" aria-label="Four programming code cards">
-      
-      <article class="program-card mint">
-        <div class="card-top">
-          <div>
-            <p class="eyebrow">PROGRAM 01</p>
-            <h2>Customer Segmentation (K-Means)</h2>
-            <p class="source">DOC-20260912-WA0003.pdf · Practical 7</p>
-          </div>
-          <button class="copy-btn" type="button" data-program="0" aria-label="Copy Program 1 — Customer Segmentation (K-Means)">
-            <span aria-hidden="true">📋</span> Copy Code
-          </button>
-        </div>
-        <pre class="code-window"><code id="code-0"></code></pre>
-        <div class="card-bottom"><span>Python</span><span class="copy-status" id="status-0" role="status" aria-live="polite"></span></div>
-      </article>
-    
-      <article class="program-card lavender">
-        <div class="card-top">
-          <div>
-            <p class="eyebrow">PROGRAM 02</p>
-            <h2>House Rent Prediction</h2>
-            <p class="source">Decision regressor.pdf</p>
-          </div>
-          <button class="copy-btn" type="button" data-program="1" aria-label="Copy Program 2 — House Rent Prediction">
-            <span aria-hidden="true">📋</span> Copy Code
-          </button>
-        </div>
-        <pre class="code-window"><code id="code-1"></code></pre>
-        <div class="card-bottom"><span>Python</span><span class="copy-status" id="status-1" role="status" aria-live="polite"></span></div>
-      </article>
-    
-      <article class="program-card peach">
-        <div class="card-top">
-          <div>
-            <p class="eyebrow">PROGRAM 03</p>
-            <h2>Customer Purchase & Sales Prediction</h2>
-            <p class="source">DOC-20260919-WA0001.pdf · Practical 8 (Parts A and B)</p>
-          </div>
-          <button class="copy-btn" type="button" data-program="2" aria-label="Copy Program 3 — Customer Purchase & Sales Prediction">
-            <span aria-hidden="true">📋</span> Copy Code
-          </button>
-        </div>
-        <pre class="code-window"><code id="code-2"></code></pre>
-        <div class="card-bottom"><span>Python</span><span class="copy-status" id="status-2" role="status" aria-live="polite"></span></div>
-      </article>
-    
-      <article class="program-card blue">
-        <div class="card-top">
-          <div>
-            <p class="eyebrow">PROGRAM 04</p>
-            <h2>Sales Prediction (MLP Neural Network)</h2>
-            <p class="source">Practical 6.pdf · Artificial Neural Network</p>
-          </div>
-          <button class="copy-btn" type="button" data-program="3" aria-label="Copy Program 4 — Sales Prediction (MLP Neural Network)">
-            <span aria-hidden="true">📋</span> Copy Code
-          </button>
-        </div>
-        <pre class="code-window"><code id="code-3"></code></pre>
-        <div class="card-bottom"><span>Python</span><span class="copy-status" id="status-3" role="status" aria-live="polite"></span></div>
-      </article>
-    
-    </section>
-    <footer>Four source PDFs · Simple, responsive, and ready to use</footer>
-  </main>
-  <script id="program-data" type="application/json">["import pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.cluster import KMeans\n\ndata = {\n  \"Customer\": [\"C1\", \"C2\", \"C3\", \"C4\", \"C5\",\n          \"C6\", \"C7\", \"C8\", \"C9\",\n          \"C10\", \"C11\", \"C12\"],\n\n    \"Annual_Income\": [25, 28, 30, 32, 35,\n              55, 58, 60, 62,\n              85, 90, 95],\n\n    \"Spending_Score\": [20, 25, 18, 30, 28,\n              55, 60, 52, 58,\n              85, 90, 82]\n}\n\ndf = pd.DataFrame(data)\n\nprint(\"Customer Dataset:\")\nprint(df)\n\nX = df[[\"Annual_Income\", \"Spending_Score\"]]\n\ninertia = []\n\nfor k in range(1, 6):\n   model = KMeans(n_clusters=k, random_state=42, n_init=10)\n   model.fit(X)\n   inertia.append(model.inertia_)\n\nplt.plot(range(1, 6), inertia, marker=\"o\")\nplt.xlabel(\"Number of Clusters (K)\")\nplt.ylabel(\"Inertia\")\nplt.title(\"Elbow Method\")\nplt.show()\n\nkmeans = KMeans(\n  n_clusters=3,\n  random_state=42,\n  n_init=10\n)\n\ndf[\"Cluster\"] = kmeans.fit_predict(X) + 1\n\nprint(\"Customer Cluster Assignments:\")\nprint(df)\n\nprint(\"Cluster Centers:\")\nprint(kmeans.cluster_centers_)\n\nplt.scatter(\n   df[\"Annual_Income\"],\n   df[\"Spending_Score\"],\n   c=df[\"Cluster\"]\n)\n\nplt.xlabel(\"Annual Income (₹ Lakhs)\")\nplt.ylabel(\"Spending Score\")\nplt.title(\"Customer Segmentation using K-Means\")\nplt.show()", "import pandas as pd\n\nimport matplotlib.pyplot as plt\n\n\nfrom sklearn.tree import DecisionTreeRegressor\n\n\nfrom sklearn.metrics import r2_score\n\ndata = pd.DataFrame({\n\n     'Area_sqft': [800, 1000, 1200, 1400, 1600, 1800,\n\n             2000, 2200, 2400, 2600, 1800, 2800],\n\n\n     'Bedrooms': [1, 2, 2, 2, 3, 3,\n\n            3, 4, 4, 4, 3, 4],\n\n\n     'Monthly_Rent': [10000, 13000, 16000, 19000, 23000, 26000,\n\n               29000, 33000, 36000, 39000, 26000, None]\n\n})\n\ndata\n\ndata.isnull().sum()\n\ndata['Monthly_Rent'] = data['Monthly_Rent'].fillna(\n\n    data['Monthly_Rent'].mean()\n\n)\n\ndata.isnull().sum()\n\ndata.duplicated().sum()\n\ndata[data.duplicated()]\n\ndata = data.drop_duplicates()\n\ndata\n\nX = data[['Area_sqft', 'Bedrooms']]\n\ny = data['Monthly_Rent']\n\nmodel = DecisionTreeRegressor(random_state=42)\n\nmodel.fit(X, y)\n\ny_pred = model.predict(X)\n\nresult = pd.DataFrame({\n\n     'Actual Rent': y,\n\n     'Predicted Rent': y_pred\n\n})\n\nresult\n\nscore = r2_score(y, y_pred)\n\nprint(\"R2 Score:\", score)\n\nnew_houses = pd.DataFrame({\n\n     'Area_sqft': [1600, 2200, 2800],\n\n     'Bedrooms': [3, 4, 4]\n\n})\n\npredicted_rent = model.predict(new_houses)\n\nprint(\"Predicted Rent for 1600 sq.ft, 3 Bedrooms:\",\n\n      predicted_rent[0])\n\nprint(\"Predicted Rent for 2200 sq.ft, 4 Bedrooms:\",\n\n      predicted_rent[1])\n\nprint(\"Predicted Rent for 2800 sq.ft, 4 Bedrooms:\",\n\n      predicted_rent[2])\n\nprediction_result = pd.DataFrame({\n\n     'Area_sqft': [1600, 2200, 2800],\n\n     'Bedrooms': [3, 4, 4],\n\n     'Predicted_Rent': predicted_rent\n\n})\n\nprediction_result\n\nplt.scatter(data['Area_sqft'],\n\n         data['Monthly_Rent'],\n\n         label='Actual Data')\n\nplt.plot(data['Area_sqft'],\n\n       y_pred,\n\n       label='Decision Tree Prediction')\n\nplt.scatter([1600, 2200, 2800],\n\n         predicted_rent,\n\n         marker='*',\n\n         s=200,\n\n         label='New Predictions')\n\nplt.title(\"House Rent Prediction using Decision Tree Regression\")\n\nplt.xlabel(\"House Area (sq.ft)\")\n\nplt.ylabel(\"Monthly Rent\")\n\nplt.legend()\n\nplt.show()", "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.metrics import accuracy_score, confusion_matrix\n\ndata = {\n  \"Age\": [22,25,28,30,32,35,38,40,42,24,27,31,36,45,29],\n  \"Income\": [25,30,35,40,45,50,55,60,65,28,32,42,52,70,38],\n  \"Website_Visits\": [2,3,4,5,6,7,8,9,10,2,3,5,7,9,4],\n  \"Previous_Purchases\": [1,1,2,2,3,3,4,4,5,1,1,2,3,5,2],\n  \"Purchase\": [0,0,0,1,1,1,1,1,1,0,0,1,1,1,0]\n}\n\ndf = pd.DataFrame(data)\n\nprint(df)\n\nX = df[[\n   \"Age\",\n   \"Income\",\n   \"Website_Visits\",\n   \"Previous_Purchases\"\n]]\n\ny = df[\"Purchase\"]\n\nX_train, X_test, y_train, y_test = train_test_split(\n  X, y,\n  test_size=0.2,\n  random_state=42,\n  stratify=y\n)\n\nmodel = DecisionTreeClassifier(\n  criterion=\"gini\",\n  max_depth=3,\n  random_state=42\n)\n\nmodel.fit(X_train, y_train)\n\ny_pred = model.predict(X_test)\n\naccuracy = accuracy_score(y_test, y_pred)\nprint(\"Accuracy:\", accuracy)\n\ncm = confusion_matrix(y_test, y_pred)\nprint(\"Confusion Matrix:\")\nprint(cm)\n\nnew_customer = pd.DataFrame({\n   \"Age\": [34],\n   \"Income\": [48],\n   \"Website_Visits\": [6],\n   \"Previous_Purchases\": [3]\n})\n\nprediction = model.predict(new_customer)\n\nprint(\"Predicted Purchase:\", prediction[0])\n\n\n# PART B – Regression Tree\n\ndata = {\n  \"Advertising\": [2,3,4,5,6,7,8,9,10,11],\n  \"Sales_Employees\": [5,6,7,8,9,10,11,12,13,14],\n  \"Store_Size\": [1000,1200,1500,1800,2000,\n            2200,2500,2800,3000,3200],\n  \"Sales\": [25,30,38,45,52,60,68,75,84,92]\n}\n\ndf = pd.DataFrame(data)\n\nX = df[[\n   \"Advertising\",\n   \"Sales_Employees\",\n   \"Store_Size\"\n]]\n\ny = df[\"Sales\"]\n\nX_train, X_test, y_train, y_test = train_test_split(\n  X, y,\n  test_size=0.2,\n  random_state=42\n)\n\nfrom sklearn.tree import DecisionTreeRegressor\n\nmodel = DecisionTreeRegressor(\n  max_depth=3,\n  random_state=42\n)\n\nmodel.fit(X_train, y_train)\n\ny_pred = model.predict(X_test)\nprint(\"Predicted Sales:\")\nprint(y_pred)\n\nfrom sklearn.metrics import r2_score\nr2 = r2_score(y_test, y_pred)\nprint(\"R² Score:\", r2)\n\nnew_store = pd.DataFrame({\n   \"Advertising\": [7.5],\n   \"Sales_Employees\": [11],\n   \"Store_Size\": [2400]\n})\n\nprediction = model.predict(new_store)\n\nprint(\"Predicted Sales:\", prediction[0])", "import pandas as pd\n\nfrom sklearn.model_selection import train_test_split\n\nfrom sklearn.preprocessing import StandardScaler\n\nfrom sklearn.neural_network import MLPRegressor\n\nfrom sklearn.metrics import r2_score\n\n# Create dataset\n\ndata = { \"Advertising\": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],\n\n\"Sales_Employees\": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14],\n\n\"Sales\": [25, 30, 38, 45, 52, 60, 68, 75, 84, 92] }\n\ndf = pd.DataFrame(data)\n\nprint(\"Dataset:\")\nprint(df)\n\n# Independent and dependent variables\n\nX = df[[\"Advertising\", \"Sales_Employees\"]]\n\ny = df[\"Sales\"]\n\n# Split the data\n\nX_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.2, random_state=42 )\n\n# Standardize the input variables\n\nscaler = StandardScaler()\n\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n\n# Create MLP model\n\nmodel = MLPRegressor( hidden_layer_sizes=(5,),\n\n                         activation=\"relu\",\n\n                         solver=\"lbfgs\",\n\n                         max_iter=5000,\n\n                         random_state=42 )\n\n# Train the model\n\nmodel.fit(X_train_scaled, y_train)\n\n# Predict test data\n\ny_pred = model.predict(X_test_scaled)\n\nprint(\"Actual Sales:\")\n\nprint(y_test.values)\n\nprint(\"Predicted Sales:\")\n\nprint(y_pred)\n\n# Predict for a new observation\n\nnew_data = pd.DataFrame({ \"Advertising\": [7.5], \"Sales_Employees\": [11] })\n\nnew_data_scaled = scaler.transform(new_data)\n\nprediction = model.predict(new_data_scaled)\n\nprint(\"Predicted Sales for New Observation:\", prediction[0])\n\n# Calculate R²\n\nr2 = r2_score(y_test, y_pred)\n\nprint(\"R² Score:\", r2)"]</script>
-  <script>
-    (() => {
-      const programs = JSON.parse(document.getElementById('program-data').textContent);
-      programs.forEach((code, index) => {
-        document.getElementById(`code-${index}`).textContent = code;
-      });
+<header>
+  <div class="eyebrow">R programming · code library</div>
+  <h1>Programming Codes</h1>
+  <p>Five statistics programs in one place. Read, scroll, and copy each code block.</p>
+</header>
+<main>
+  <article class="card">
+    <div class="card-top"><div class="card-head"><div><div class="number">Program 01</div><h2>Chi-Squared Test for Association</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
+    <pre><code># Step1: Load the data and organize it into data frames
 
-      async function fallbackCopy(text) {
-        const area = document.createElement('textarea');
-        area.value = text;
-        area.setAttribute('readonly', '');
-        area.style.position = 'fixed';
-        area.style.opacity = '0';
-        area.style.pointerEvents = 'none';
-        document.body.appendChild(area);
-        area.select();
-        area.setSelectionRange(0, area.value.length);
-        let copied = false;
-        try { copied = document.execCommand('copy'); } catch (_) { copied = false; }
-        area.remove();
-        if (!copied) throw new Error('Copy command was not successful');
+data &lt;- data.frame(
+  Price = c(3,2,1,3,2,1,3,2,1,3,2,1,3,2,1),
+  Rating = c(0,0,0,1,1,1,2,2,2,3,3,3,4,4,4),
+  Respondents = c(4,1,4,8,21,20,26,22,23,15,12,9,7,4,4)
+)
+data
+
+# Step2: Generate a cross contingency table summing up total respondent for each
+# price-rating combination.
+
+table_data &lt;- xtabs(Respondents ~ Price + Rating, data = data)
+
+table_data
+
+# Step3: Create a multi-category bar plot to visualize the data
+barplot(table_data, legend=T, xlab="Ratings", ylab="No. of Respondents")
+
+# Step 4: Run chi-squared test to test the Hypothesis
+chisq.test(table_data)
+
+#Step 5: Monte-Carlo simulation
+chisq.test(table_data,simulate.p.value=TRUE, B=2500)</code></pre>
+  </article>
+
+  <article class="card">
+    <div class="card-top"><div class="card-head"><div><div class="number">Program 02</div><h2>One-Way ANOVA</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
+    <pre><code>#Step 1: load the CSV file
+
+
+#Step 2: visualization of mean using Boxplot
+
+boxplot(Score~Teaching_Method,data=teaching_method_scores,col = "lightblue", main =
+"Distribution of Test Scores by Teaching Method", xlab = "Teaching Method", ylab = "Test
+Score")
+
+#Step 3: One way ANOVA
+
+anova_result &lt;- aov(Score ~ Teaching_Method, data = teaching_method_scores)
+
+summary(anova_result)
+
+
+#Step 4: Tukey HSD post hoc testing
+
+tukey_results &lt;- TukeyHSD(anova_result)
+
+print(tukey_results)</code></pre>
+  </article>
+
+  <article class="card">
+    <div class="card-top"><div class="card-head"><div><div class="number">Program 03</div><h2>Two-Way ANOVA</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
+    <pre><code>#Step 1: load the CSV file and organize it into data frames.
+
+# Step 2: Using box plot, visualizing light vs temperature for different glass types.
+boxplot(Light ~ Temp * Glass, data = oscilloscope_light_output, col = c("lightblue",
+"lightgreen"), main = "Boxplot of Light vs Temperature for Different Glass Types",xlab =
+"Temperature",ylab = "Light")
+
+# Step 3: Formulate a hypothesis about the effect of glass type and temperature on light
+# output. Run Two way ANOVA.
+
+anova_result= aov(Light ~ Glass * Temp, data = oscilloscope_light_output)
+
+summary(anova_result)
+
+# Step 4: Conduct Post-hoc testing
+
+TukeyHSD(anova_result)</code></pre>
+  </article>
+
+  <article class="card">
+    <div class="card-top"><div class="card-head"><div><div class="number">Program 04</div><h2>Linear Regression</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
+    <pre><code>#Step 1: load the data and organize it into data frames.
+
+height= c(65, 62, 60, 64, 68, 70, 68, 65)
+
+weight= c(75, 70, 65, 72, 75, 80, 72, 64)
+
+student_data= data.frame(Height=height, Weight=weight)
+
+student_data
+
+#Step 2: Draw a scatter plot and interpret the visualization.
+
+plot(student_data$Height, student_data$Weight, main= "Scatter Plot of Height vs. Weight",
+pch=19, col= "red", xlab= "Height", ylab= "Weight")
+
+#Step3: Add a line to best fit the scatter plot
+
+abline(lm(student_data$Weight ~ student_data$Height), col="blue")
+
+#Step 4: Create a simple regression of Weight vs Height
+
+reg= lm(student_data$Weight~student_data$Height)
+
+reg
+
+names(reg)
+
+reg$coeff
+
+confint(reg)
+
+reg$fitted
+
+fitted(reg)
+
+reg$resid
+
+resid(reg)
+
+
+#Step 5: Find correlation coefficient and intercept
+
+correlation=cor(student_data$Height, student_data$Weight)
+
+correlation
+
+summary(correlation)
+
+plot(Weight~Height, data=student_data)
+
+abline(reg)</code></pre>
+  </article>
+
+  <article class="card">
+    <div class="card-top"><div class="card-head"><div><div class="number">Program 05</div><h2>Multiple Regression</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
+    <pre><code>#Step 1: Create a data frame
+
+sales =c(10, 15, 12, 18, 20, 22, 25, 28, 39, 32)
+
+advertising=c(5, 6, 6, 8, 10, 12, 15, 16, 18, 20)
+
+pricing= c(20, 18, 16, 15, 14, 13, 12, 11, 10, 9)
+
+competitor_pricing= c(18, 17, 16, 16, 15, 14, 13, 12, 11, 10)
+
+sales_data= data.frame(Sales = sales, Advertising = advertising, Pricing = pricing,
+Competitor_Pricing = competitor_pricing)
+
+sales_data
+
+
+# Step 2: Create a regression model
+
+reg_model=lm(Sales ~ Advertising + Pricing + Competitor_Pricing, data = sales_data)
+
+reg_model
+
+summary(reg_model)
+
+
+# Step 3: Get the correlation coefficients
+
+correlation_coefficient=cor(sales_data, method = "pearson")
+
+correlation_coefficient</code></pre>
+  </article>
+  <aside class="note"><strong>Source note:</strong> The One-Way ANOVA PDF shows the Step 1 CSV-loading heading but no loading command, and the Two-Way ANOVA PDF likewise provides only a Step 1 comment, with no data-loading code. Those gaps are preserved rather than filled with invented code.</aside>
+</main>
+<footer>Source: the five attached PDF documents. Code is displayed from the program sections; output, interpretation, and conclusion text are not included in the copyable blocks.</footer>
+<script>
+(function () {
+  const buttons = document.querySelectorAll(".copy");
+  buttons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const card = button.closest(".card");
+      const code = card.querySelector("pre code").textContent;
+      const status = card.querySelector(".status");
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(code);
+        } else {
+          const area = document.createElement("textarea");
+          area.value = code;
+          area.setAttribute("readonly", "");
+          area.style.position = "fixed";
+          area.style.opacity = "0";
+          document.body.appendChild(area);
+          area.select();
+          const copied = document.execCommand("copy");
+          area.remove();
+          if (!copied) throw new Error("Copy command failed");
+        }
+        status.textContent = "Copied successfully!";
+        button.textContent = "✓ Copied";
+        window.setTimeout(() => {
+          status.textContent = "";
+          button.textContent = "📋 Copy Code";
+        }, 1800);
+      } catch (error) {
+        status.textContent = "Copy failed. Please select the code and copy it manually.";
       }
-
-      document.querySelectorAll('.copy-btn').forEach(button => {
-        button.addEventListener('click', async () => {
-          const index = Number(button.dataset.program);
-          const status = document.getElementById(`status-${index}`);
-          try {
-            if (navigator.clipboard && window.isSecureContext) {
-              await navigator.clipboard.writeText(programs[index]);
-            } else {
-              await fallbackCopy(programs[index]);
-            }
-            status.textContent = 'Copied successfully!';
-            button.innerHTML = '<span aria-hidden="true">✓</span> Copied!';
-            window.setTimeout(() => {
-              status.textContent = '';
-              button.innerHTML = '<span aria-hidden="true">📋</span> Copy Code';
-            }, 1800);
-          } catch (error) {
-            status.textContent = 'Copy blocked — select the code and copy manually.';
-          }
-        });
-      });
-    })();
-  </script>
+    });
+  });
+})();
+</script>
 </body>
 </html>
