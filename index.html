@@ -3,246 +3,126 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f6f7fb">
-<title>Programming Codes</title>
+<meta name="description" content="All 12 R practical programs from the Statistical Data Analysis Using R record.">
+<title>Programming Codes | R Practical Record</title>
 <style>
-:root{color-scheme:light;--ink:#172033;--muted:#667085;--paper:#f6f7fb}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
-header{max-width:1120px;margin:0 auto;padding:48px 22px 26px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:#5865a7}
-.eyebrow:before{content:"";width:22px;height:2px;background:#5865a7}
-h1{font-size:clamp(2rem,5vw,3.3rem);letter-spacing:-.045em;line-height:1.08;margin:14px 0 10px}
-header p{margin:0;color:var(--muted);font-size:1.05rem}
-main{max-width:1120px;margin:0 auto;padding:0 22px 54px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-.card{--accent:#5265a8;--wash:#eef1ff;background:white;border:1px solid color-mix(in srgb,var(--accent) 24%,white);border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(22,31,55,.06);min-width:0}
-.card-top{padding:20px 20px 16px;background:var(--wash);border-bottom:1px solid color-mix(in srgb,var(--accent) 18%,white)}
-.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
-.number{font-size:.75rem;font-weight:800;letter-spacing:.09em;color:var(--accent);text-transform:uppercase}
-h2{font-size:1.12rem;line-height:1.3;margin:5px 0 0;letter-spacing:-.02em}
-.copy{flex-shrink:0;border:0;border-radius:10px;padding:10px 13px;background:var(--accent);color:white;font-family:inherit;font-size:.83rem;font-weight:700;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.08);transition:filter .15s}
-.copy:hover{filter:brightness(.92)}.copy:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 35%,white);outline-offset:3px}
-.status{height:18px;margin-top:8px;color:#245b42;font-size:.8rem;font-weight:650}
-pre{margin:0;padding:19px 20px 22px;overflow:auto;max-height:440px;background:var(--codebg,#fff);color:#20283b;font: .84rem/1.65 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;tab-size:2;white-space:pre;overscroll-behavior:contain}
-pre code{font:inherit}
-.card:nth-child(1){--accent:#5b61b8;--wash:#f0efff;--codebg:#fcfbff}
-.card:nth-child(2){--accent:#177c70;--wash:#e8f8f3;--codebg:#fbfffd}
-.card:nth-child(3){--accent:#a35b25;--wash:#fff1e4;--codebg:#fffdfa}
-.card:nth-child(4){--accent:#3569a8;--wash:#eaf3ff;--codebg:#fbfdff}
-.card:nth-child(5){--accent:#9a4776;--wash:#fbeef6;--codebg:#fffcfe}
-.note{grid-column:1/-1;padding:14px 17px;border-radius:12px;background:#fff8e8;border:1px solid #f1dfb4;color:#674c18;font-size:.9rem}
-footer{max-width:1120px;margin:0 auto;padding:0 22px 34px;color:var(--muted);font-size:.82rem}
-@media(max-width:760px){header{padding-top:34px}main{grid-template-columns:1fr;gap:16px}.card-top{padding:17px}pre{max-height:380px;padding:16px;font-size:.8rem}.copy{padding:9px 11px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+:root { color-scheme: light; --ink:#172033; --muted:#657086; --paper:#f6f8fc; --line:#e3e8f1; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+header { padding:44px 20px 30px; text-align:center; background:linear-gradient(135deg,#fff 0%,#edf3ff 100%); border-bottom:1px solid var(--line); }
+header .eyebrow { display:inline-block; padding:6px 11px; border-radius:999px; background:#e5edff; color:#294d9b; font-size:.78rem; font-weight:750; letter-spacing:.06em; text-transform:uppercase; }
+h1 { margin:14px 0 8px; font-size:clamp(2rem,5vw,3.25rem); letter-spacing:-.04em; }
+header p { margin:0 auto; max-width:620px; color:var(--muted); font-size:1.04rem; line-height:1.6; }
+main { max-width:1180px; margin:0 auto; padding:28px 18px 54px; }
+.toolbar { display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin:0 0 22px; }
+.count { color:var(--muted); font-size:.94rem; }
+.search { width:min(100%,360px); padding:12px 14px; border:1px solid #d7deea; border-radius:12px; background:white; font:inherit; outline:none; }
+.search:focus { border-color:#7698ed; box-shadow:0 0 0 3px #dce6ff; }
+.grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.card { min-width:0; border:1px solid var(--line); border-radius:18px; overflow:hidden; background:white; box-shadow:0 6px 20px rgba(25,43,77,.055); }
+.card-head { display:flex; gap:12px; align-items:flex-start; justify-content:space-between; padding:18px 18px 15px; background:var(--card-bg); border-bottom:1px solid color-mix(in srgb,var(--card-accent) 16%,white); }
+.title-wrap { display:flex; gap:11px; align-items:flex-start; min-width:0; }
+.num { display:grid; place-items:center; flex:0 0 34px; height:34px; border-radius:10px; background:var(--card-accent); color:white; font-size:.86rem; font-weight:800; }
+h2 { margin:3px 0 0; font-size:1.02rem; line-height:1.4; overflow-wrap:anywhere; }
+.copy { flex-shrink:0; border:0; border-radius:10px; background:var(--card-accent); color:white; padding:10px 12px; font:700 .82rem/1.2 inherit; font-family:inherit; cursor:pointer; transition:filter .15s ease; }
+.copy:hover { filter:brightness(.92); }
+.copy:focus-visible { outline:3px solid #7d9ff2; outline-offset:3px; }
+.code-wrap { background:#fff; padding:0; }
+pre { margin:0; padding:18px; overflow:auto; max-height:520px; color:#202b3c; font: .86rem/1.65 "SFMono-Regular",Consolas,"Liberation Mono",monospace; tab-size:4; white-space:pre; }
+pre code { font:inherit; }
+.empty { display:none; padding:28px; text-align:center; color:var(--muted); }
+footer { padding:0 18px 30px; text-align:center; color:var(--muted); font-size:.85rem; }
+@media(max-width:760px) { .grid { grid-template-columns:1fr; } header { padding-top:34px; } .card-head { padding:15px; } pre { max-height:440px; font-size:.82rem; padding:15px; } }
+@media(prefers-reduced-motion:reduce) { * { transition:none !important; } }
 </style>
 </head>
 <body>
 <header>
-  <div class="eyebrow">R programming · code library</div>
+  <span class="eyebrow">R Practical Record · 25MCOMS354</span>
   <h1>Programming Codes</h1>
-  <p>Five statistics programs in one place. Read, scroll, and copy each code block.</p>
+  <p>All practical programs in one place. Browse each card and copy its code with one click.</p>
 </header>
 <main>
-  <article class="card">
-    <div class="card-top"><div class="card-head"><div><div class="number">Program 01</div><h2>Chi-Squared Test for Association</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
-    <pre><code># Step1: Load the data and organize it into data frames
-
-data &lt;- data.frame(
-  Price = c(3,2,1,3,2,1,3,2,1,3,2,1,3,2,1),
-  Rating = c(0,0,0,1,1,1,2,2,2,3,3,3,4,4,4),
-  Respondents = c(4,1,4,8,21,20,26,22,23,15,12,9,7,4,4)
-)
-data
-
-# Step2: Generate a cross contingency table summing up total respondent for each
-# price-rating combination.
-
-table_data &lt;- xtabs(Respondents ~ Price + Rating, data = data)
-
-table_data
-
-# Step3: Create a multi-category bar plot to visualize the data
-barplot(table_data, legend=T, xlab="Ratings", ylab="No. of Respondents")
-
-# Step 4: Run chi-squared test to test the Hypothesis
-chisq.test(table_data)
-
-#Step 5: Monte-Carlo simulation
-chisq.test(table_data,simulate.p.value=TRUE, B=2500)</code></pre>
-  </article>
-
-  <article class="card">
-    <div class="card-top"><div class="card-head"><div><div class="number">Program 02</div><h2>One-Way ANOVA</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
-    <pre><code>#Step 1: load the CSV file
-
-
-#Step 2: visualization of mean using Boxplot
-
-boxplot(Score~Teaching_Method,data=teaching_method_scores,col = "lightblue", main =
-"Distribution of Test Scores by Teaching Method", xlab = "Teaching Method", ylab = "Test
-Score")
-
-#Step 3: One way ANOVA
-
-anova_result &lt;- aov(Score ~ Teaching_Method, data = teaching_method_scores)
-
-summary(anova_result)
-
-
-#Step 4: Tukey HSD post hoc testing
-
-tukey_results &lt;- TukeyHSD(anova_result)
-
-print(tukey_results)</code></pre>
-  </article>
-
-  <article class="card">
-    <div class="card-top"><div class="card-head"><div><div class="number">Program 03</div><h2>Two-Way ANOVA</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
-    <pre><code>#Step 1: load the CSV file and organize it into data frames.
-
-# Step 2: Using box plot, visualizing light vs temperature for different glass types.
-boxplot(Light ~ Temp * Glass, data = oscilloscope_light_output, col = c("lightblue",
-"lightgreen"), main = "Boxplot of Light vs Temperature for Different Glass Types",xlab =
-"Temperature",ylab = "Light")
-
-# Step 3: Formulate a hypothesis about the effect of glass type and temperature on light
-# output. Run Two way ANOVA.
-
-anova_result= aov(Light ~ Glass * Temp, data = oscilloscope_light_output)
-
-summary(anova_result)
-
-# Step 4: Conduct Post-hoc testing
-
-TukeyHSD(anova_result)</code></pre>
-  </article>
-
-  <article class="card">
-    <div class="card-top"><div class="card-head"><div><div class="number">Program 04</div><h2>Linear Regression</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
-    <pre><code>#Step 1: load the data and organize it into data frames.
-
-height= c(65, 62, 60, 64, 68, 70, 68, 65)
-
-weight= c(75, 70, 65, 72, 75, 80, 72, 64)
-
-student_data= data.frame(Height=height, Weight=weight)
-
-student_data
-
-#Step 2: Draw a scatter plot and interpret the visualization.
-
-plot(student_data$Height, student_data$Weight, main= "Scatter Plot of Height vs. Weight",
-pch=19, col= "red", xlab= "Height", ylab= "Weight")
-
-#Step3: Add a line to best fit the scatter plot
-
-abline(lm(student_data$Weight ~ student_data$Height), col="blue")
-
-#Step 4: Create a simple regression of Weight vs Height
-
-reg= lm(student_data$Weight~student_data$Height)
-
-reg
-
-names(reg)
-
-reg$coeff
-
-confint(reg)
-
-reg$fitted
-
-fitted(reg)
-
-reg$resid
-
-resid(reg)
-
-
-#Step 5: Find correlation coefficient and intercept
-
-correlation=cor(student_data$Height, student_data$Weight)
-
-correlation
-
-summary(correlation)
-
-plot(Weight~Height, data=student_data)
-
-abline(reg)</code></pre>
-  </article>
-
-  <article class="card">
-    <div class="card-top"><div class="card-head"><div><div class="number">Program 05</div><h2>Multiple Regression</h2></div><button class="copy" type="button">📋 Copy Code</button></div><div class="status" aria-live="polite"></div></div>
-    <pre><code>#Step 1: Create a data frame
-
-sales =c(10, 15, 12, 18, 20, 22, 25, 28, 39, 32)
-
-advertising=c(5, 6, 6, 8, 10, 12, 15, 16, 18, 20)
-
-pricing= c(20, 18, 16, 15, 14, 13, 12, 11, 10, 9)
-
-competitor_pricing= c(18, 17, 16, 16, 15, 14, 13, 12, 11, 10)
-
-sales_data= data.frame(Sales = sales, Advertising = advertising, Pricing = pricing,
-Competitor_Pricing = competitor_pricing)
-
-sales_data
-
-
-# Step 2: Create a regression model
-
-reg_model=lm(Sales ~ Advertising + Pricing + Competitor_Pricing, data = sales_data)
-
-reg_model
-
-summary(reg_model)
-
-
-# Step 3: Get the correlation coefficients
-
-correlation_coefficient=cor(sales_data, method = "pearson")
-
-correlation_coefficient</code></pre>
-  </article>
-  <aside class="note"><strong>Source note:</strong> The One-Way ANOVA PDF shows the Step 1 CSV-loading heading but no loading command, and the Two-Way ANOVA PDF likewise provides only a Step 1 comment, with no data-loading code. Those gaps are preserved rather than filled with invented code.</aside>
+  <div class="toolbar">
+    <div class="count" id="count">12 programs</div>
+    <input class="search" id="search" type="search" placeholder="Search programs…" aria-label="Search programs">
+  </div>
+  <section class="grid" id="programs" aria-label="Program cards"></section>
+  <div class="empty" id="empty">No programs match your search.</div>
 </main>
-<footer>Source: the five attached PDF documents. Code is displayed from the program sections; output, interpretation, and conclusion text are not included in the copyable blocks.</footer>
+<footer>Source: uploaded Statistical Data Analysis Using R practical record.</footer>
 <script>
-(function () {
-  const buttons = document.querySelectorAll(".copy");
-  buttons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const card = button.closest(".card");
-      const code = card.querySelector("pre code").textContent;
-      const status = card.querySelector(".status");
+const programs = [{"number": 1, "title": "Exercise 1 — Descriptive Statistics and Summary", "code": "# Step 1: Load the dataset\n\nSales_Data<-read.csv(“D:/R/Sales_Data.csv”)\n\n\n\n# Step 2: Examine the structure of the dataset\n\nStr (Sales_Data)\n\n\n\n\n# Step 3: Calculate basic summary statistics\n\nSummary (Sales_Data$Quantity)\n\nSummary (Sales_Data$Price)\n\nSummary (Sales_Data$Total_Price)\n\nSummary (Sales_Data$Discount)\n\n# Step 4: Create a frequency table for products\n\nproduct_frequency<-table (Sales_Data$Product)\n\nprint (product_ frequency)\n\n#Step 5: Create a contingency table\n\ncontingeny_table<-table (Sales_Data$Product, Sales_Data$Discount)\n\nprint(contingeny_table)\n\n#step 6: calculate total revenue\n\ntotal_revenue<-sum (Sales_Data$Total_Price)\n\nprint(total_revenue)\n\n#Step 7: Visualize the data (e.g., create histograms, bar charts)\n\n#Example: Histogram of Total_Price\n\nHist (Sales_Data$Total_Price, main=” Distribution of Total Price”, xlab=” Total Price)\n\n#Example: Bar chart of product frequencies\n\nBarplot (product_frequency, main=” Product Frequencies”, xlab=” Product”, ylab=”\nFrequency”)", "bg": "#eef5ff", "accent": "#2457a7"}, {"number": 2, "title": "Exercise 2 — Assessing Data Distribution (Logistic Industry)", "code": "#Step 1: Load the Data\n\n    >ch1_data<-c (7,7,8,8,9,10,11,11,12,12,12,13,14,15,17,17,17,18,18,19)\n\n    >ch2_data<-c (36,21,27,39,33,42,25,30,31,37,35,29,23,34,41.23,32,32,30,39)\n\n\n\n    #Step 2: Exploratory Data Analysis\n\n\n#Summary statistics for channel 1\n\nSummary(ch1_data)\n\n>std_deviation_ch1=sd(ch1_data)\n\n>std_deviation_ch1\n\n>quartiles_ch1=quantile (ch1_data, probs=c (0.25,0.5,0.75))\n\n>quartiles_ch1\n\n#Summary statistics of channel 2\n\n>std_deviation_ch2=sd(ch2_data)\n\n>std_deviation_ch2\n\n>quartiles_ch2=quantile (ch2_data, probs=c (0.25,0.5,0.75))\n\n>quartiles_ch2\n\n#Step 3: Create a histogram\n\n>hist (ch1_data, main=” Delivery Times Ch1”, xlab=” Delivery Times (hrs)”, col=” light\nblue”, border=” black”)\n\n>hist (ch2_data, main=” Delivery Times Ch2”, xlab=” Delivery Times (hrs)”, col=” light\nblue”, border=” black”)\n\n#Step 4: Density plot and visualize the data for channel 1.\n\n>dens=density(ch1_data)\n\n>plot (dens$x, dens$y)\n\n#For channel 2\n\n>dens=density(ch2_data)\n\n>plot (dens$x, dens$y)\n\n#Step 5: Conduct Shapiro-Wilk normality test\n\n>#Shapiro test\n\n>Shapiro_test_result=Shapiro. Test(ch1_data)\n\n>print (Shapiro_test_result)\n\n#Step 6: Conduct the Kolmogorov-Smirnov test\n\n>a=ks.test (ch1_data,” pnorm”, mean=mean(ch1_data), sd=sd(ch1_data))\n\n>print(a)\n\n>b=ks.test (ch2_data,” pnorm”, mean=mean(ch2_data), sd=sd(ch2_data))\n\n>print(b)\n\n#Step 7: Create a QQ plot to visually asses the goodness-of -fit\n\n>qqnorm(ch1_data)\n\n>qqline(ch1_data)\n\n>qqnorm(ch2_data)\n\n>qqline(ch2_data)\n\n#Step 8: Draw qqplot to compare the two channels\n\n>qp=qqplot(ch1_data,ch2_data)", "bg": "#edf9f1", "accent": "#24734a"}, {"number": 3, "title": "Exercise 3 — Simple Hypothesis Testing (Manufacturing Industry)", "code": "#Step 1: load the dataset\n\n>new_process_sample_A=c\n(355.2,354.8,355.0,355.1,354.9,355.3,354.7,355.2,355.0,355.1,355.2,355.0,355.4,355.\n2,354.9,355.0,355.1,354.8,355.2,354.9,355.0,355.3,354.7,355.1,355.0,355.2,355.1,35\n5.2,355.3,354.8)\n\n>old_process_sample_B=c\n(355.0,354.7,354.8,355.0,354.9,354.7,355.1,354.8,355.0,354.9,354.7,355.0,354.8,355.\n1,354.9,355.0,354.8,355.0,354.7,355.1,354.9,354.8,355.0,354.7,355.1,355.0,354.8,35\n5.0,354.7,355.1)\n\n\n\n#Step 2: One tailed t-test\n\n>mean(new_process_sample_A)\n\n>t_test_result <-t.test(new_process_sample_A, mu=355.0567)\n\n>t_test_result\n\n>mean(old_process_sample_B)\n\n>t_test_result <-t.test(old_process_sample_B, mu=354.9033)\n\n>t_test_result\n\n#Step 3: Two sample t-test\n\n>t_test_result <- t.test(new_process_sample_A, old_process_sample_B)\n\n>print(t_test_result)", "bg": "#fff4e8", "accent": "#a85416"}, {"number": 4, "title": "Exercise 4 — Simple Hypothesis Testing (Pharmaceutical Industry)", "code": "#Step 1: load the dataset\n\nafter=c(4,3,4,2,3)\n\nbefore=c(6,7,8,5,7)\n\n#Step 2: two-sample paired Wilcoxon U-test\n\n    1. result=Wilcoxon.test(after,before,paired=TRUE)\n    2. print(result)\n    3. median_before=median(before)\n    4. median_after=median(after)", "bg": "#f8efff", "accent": "#7844a1"}, {"number": 5, "title": "Exercise 5 — Covariance and Correlation", "code": "#Step 1: load the stock price data into R and organize it into data frames\n\n>microsoft=read.csv(file.choose())\n\n>apple=read.csv(file.choose())\n\n#Step 2: Select the ‘Adj Close’(adjusted closing price) column for analysis\n\n>apple_adj.close=Apple_Stock_Data$Adj.Close\n\n>microsoft_adj.close=Microsoft_Stock_Data$Adj.Close\n\n#Step 3: Create a data frame for analysis\n\n>stock_data<-data.frame(AAPL=apple_adj.close,MSFT=microsoft_adj.close)\n\n>stock_data\n\n#Step 4: Calculate the covariance matrix\n\n>covariance_matrix<-cov(stock_data)\n\n\n\n>covariance_matrix\n\n#Step 5: Calculate the Pearson correlation matrix\n\n>correlation_matrix<-cor(stock_data)\n\n>correlation_matrix\n\n#Step 6: Hypothesis Testing\n\n>correlation_test=cor.test(stock_data$AAPL, stock_data$MSFT)\n\n>print(correlation_test)\n\n#Step 7: Create a scatterplot of the selected stock prices to visualize their relationships.\n\n>plot (stock_data,xlab=”apple stock”,ylab=”microsoft “, main=”scatterplot of stock\nprices”)", "bg": "#eafafa", "accent": "#147078"}, {"number": 6, "title": "Exercise 6 — Association Test using Chi-Squared Test", "code": "#Step 1: Load the data and organize it into data frames\n\ndata <-data.frames(\n\n\nPrice=c(3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1),\n\nRating=c(0,0,0,1,1,1,2,2,2,3,3,3,4,4,4),\n\nRespondents=c(4,1,4,8,21,20,26,22,23,15,12,9,7,4,4)\n\n)\n\ndata\n\n#Step 2: Generate a cross Contingency table summing up total respondents for each\nprice-rating combination.\n\ntable_data <-xtabs(Respondents~Price+Rating, data=data)\n\ntable_data\n\n#Step 3: Create a multi-category barplot to visualize the data\n\nbarplot(table_data,legend=T,xlab=”Ratings”,ylab=”No.of Respondents”)\n\n#Step 4: Run chi-squared test to test hypothesis\n\nchisq.test(table_data)\n\n#Step 5: Monte-Carlo simulation\n\nChisq.test(table_data,simulate.p.value=TRUE,B=2500)", "bg": "#fff0f2", "accent": "#a63d55"}, {"number": 7, "title": "Exercise 7 — One Way ANOVA", "code": "#Step 1: Load the csv file\n\n#Step 2: Visualization of mean using boxplot\n\n>boxplot(Score~Teaching_Method, data=teaching_method_scores,col=”lightblue”,\nmain=”Distribution of Test Scores by Teaching Method”,xlab=”Teaching Method”,\nylab=”Test Score”)\n\n#Step 3: One way ANOVA\n\n>anova_result<-aov(Score~Teaching_Method,data=teaching_method_scores)\n\n>summary(anova_result)\n\n#Step 4: Tukey HSD post-hoc testing\n\n>tukey_result<-TukeyHSD(anova_result)\n\n>print(tukey_result)", "bg": "#f3f4f6", "accent": "#4b5563"}, {"number": 8, "title": "Exercise 8 — Two Way ANOVA", "code": "#Step 1: load the CSV file and organize it into data frames.\n\n# Step 2: Using box plot, visualizing light vs temperature for different glass types.\n\nboxplot(Light ~ Temp * Glass, data = oscilloscope_light_output, col = c(\"lightblue\",\n\n\"lightgreen\"), main = \"Boxplot of Light vs Temperature for Different Glass Types\",xlab =\n\n\"Temperature\",ylab = \"Light\")\n\n# Step 3: Formulate a hypothesis about the effect of glass type and temperature on light\n\noutput. Run Two way ANOVA.\n\nanova_result= aov(Light ~ Glass * Temp, data = oscilloscope_light_output)\n\nsummary(anova_result)\n\n# Step 4: Conduct Post-hoc testing\n\nTukeyHSD(anova_result)", "bg": "#f2f0ff", "accent": "#5b4bb7"}, {"number": 9, "title": "Exercise 9 — Linear Regression", "code": "#Step 1: load the data and organize it into data frames.\n\n> height= c(65, 62, 60, 64, 68, 70, 68, 65)\n\n> weight= c(75, 70, 65, 72, 75, 80, 72, 64)\n\n> student_data= data.frame(Height=height, Weight=weight)\n\n> student_data\n\n#Step 2: Draw a scatter plot and interpret the visualization.\n\n>plot(student_data$Height, student_data$Weight, main= \"Scatter Plot of Height vs.\nWeight\",\n\npch=19, col= \"red\", xlab= \"Height\", ylab= \"Weight\")\n\n#Step 3: Add a line to best fit the scatter plot\n\n> abline(lm(student_data$Weight ~ student_data$Height), col=\"blue\")\n\n\n\n#Step 4: Create a simple regression of Weight vs Height\n\n>reg= lm(student_data$Weight~student_data$Height)\n\n> reg\n\nnames(reg)\n\n> reg$coeff\n\n>confint(reg)\n\n>reg$fitted\n\n> fitted(reg)\n\n> reg$resid\n\n> resid(reg)\n\nStep 5: Find correlation coefficient and intercept\n\n>correlation=cor(student_data$Height, student_data$Weight)\n\n> correlation\n\n>summary(correlation)\n\n>plot(Weight~Height, data=student_data)\n\n>abline(reg)", "bg": "#f0f9e8", "accent": "#507c2e"}, {"number": 10, "title": "Exercise 10 — Multiple Regression", "code": "#Step 1: Create a data frame\n\n>sales =c(10, 15, 12, 18, 20, 22, 25, 28, 39, 32)\n\n> advertising=c(5, 6, 6, 8, 10, 12, 15, 16, 18, 20)\n\n> pricing= c(20, 18, 16, 15, 14, 13, 12, 11, 10, 9)\n\n> competitor_pricing= c(18, 17, 16, 16, 15, 14, 13, 12, 11, 10)\n\n>sales_data= data.frame(Sales = sales, Advertising = advertising, Pricing = pricing,\n\nCompetitor_Pricing = competitor_pricing)\n\n> sales_data\n\n# Step 2: Create a regression model\n\n> reg_model=lm(Sales ~ Advertising + Pricing + Competitor_Pricing, data = sales_data)\n\n> reg_model\n\n> summary(reg_model)\n\n# Step 3: Get the correlation coefficients\n\ncorrelation_coefficient=cor(sales_data, method = \"pearson\")\n\n> correlation_coefficient", "bg": "#fff8dc", "accent": "#8a6a00"}, {"number": 11, "title": "Exercise 11 — Non-linear Regression", "code": "# Step 1: Load the above data into R.Observe the data.\n\n# Step 2: Visualizing the data\n\nplot(growth~nutrient,data = plant_growth_nutrient)\n\nStep 3:Generate the model\n\npg.lm= lm(growth~log(nutrient), data=plant_growth_nutrient)\n\nsummary(pg.lm)", "bg": "#eaf2ff", "accent": "#315c9b"}, {"number": 12, "title": "Exercise 12 — Polynomial Regression", "code": "# Step 1:Load the data into R\n\nStep 2: Visualizing the data\n\nplot(abund~light, data=bbbl_abund_light)\n\n# Step 3:Generate the model\n\nbbel.lm=lm(abund~light+(light^2), data=bbbl_abund_light)\n\nsummary(bbel.lm)", "bg": "#fdf0e5", "accent": "#9b512d"}];
+const grid = document.getElementById('programs');
+const count = document.getElementById('count');
+const search = document.getElementById('search');
+const empty = document.getElementById('empty');
+
+function render(query = '') {
+  grid.replaceChildren();
+  const q = query.trim().toLowerCase();
+  const visible = programs.filter(p => (p.title + ' ' + p.code).toLowerCase().includes(q));
+  visible.forEach(p => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.style.setProperty('--card-bg', p.bg);
+    card.style.setProperty('--card-accent', p.accent);
+    const head = document.createElement('div');
+    head.className = 'card-head';
+    const titleWrap = document.createElement('div');
+    titleWrap.className = 'title-wrap';
+    const num = document.createElement('span');
+    num.className = 'num';
+    num.textContent = String(p.number).padStart(2, '0');
+    const title = document.createElement('h2');
+    title.textContent = p.title;
+    titleWrap.append(num, title);
+    const button = document.createElement('button');
+    button.className = 'copy';
+    button.type = 'button';
+    button.textContent = '📋 Copy Code';
+    button.setAttribute('aria-label', 'Copy code for ' + p.title);
+    button.addEventListener('click', async () => {
       try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(code);
-        } else {
-          const area = document.createElement("textarea");
-          area.value = code;
-          area.setAttribute("readonly", "");
-          area.style.position = "fixed";
-          area.style.opacity = "0";
-          document.body.appendChild(area);
-          area.select();
-          const copied = document.execCommand("copy");
-          area.remove();
-          if (!copied) throw new Error("Copy command failed");
-        }
-        status.textContent = "Copied successfully!";
-        button.textContent = "✓ Copied";
-        window.setTimeout(() => {
-          status.textContent = "";
-          button.textContent = "📋 Copy Code";
-        }, 1800);
-      } catch (error) {
-        status.textContent = "Copy failed. Please select the code and copy it manually.";
+        await copyText(p.code);
+        button.textContent = '✓ Copied!';
+      } catch (err) {
+        button.textContent = 'Copy failed';
       }
+      window.setTimeout(() => { button.textContent = '📋 Copy Code'; }, 1600);
     });
+    head.append(titleWrap, button);
+    const wrap = document.createElement('div');
+    wrap.className = 'code-wrap';
+    const pre = document.createElement('pre');
+    const code = document.createElement('code');
+    code.textContent = p.code;
+    pre.append(code);
+    wrap.append(pre);
+    card.append(head, wrap);
+    grid.append(card);
   });
-})();
+  count.textContent = `${visible.length} of ${programs.length} programs`;
+  empty.style.display = visible.length ? 'none' : 'block';
+}
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.append(area);
+  area.select();
+  const ok = document.execCommand('copy');
+  area.remove();
+  if (!ok) throw new Error('Clipboard copy was not available');
+}
+search.addEventListener('input', () => render(search.value));
+render();
 </script>
 </body>
 </html>
